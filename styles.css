@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#display-container {
+    background-color: green;
+    display: flex;
+    justify-self: flex-end;
+    align-items: flex-end;
+    width: 400px;
+    height: 100px;   
+    padding: 10px;
+}
+#display {
+    margin-left: auto;
+    margin-bottom: 10px;
+    font-size: 50px;
+    
+}
