@@ -1,9 +1,10 @@
     let displayStr = "";
 
-    let firstNumber = "";
+    let firstNumber = "0";
     let secondNumber = "";
     let operator = "";
     let equaled = false;
+    let result = 0;
     let display = document.querySelector("#display");
 
     function add(num1, num2) {
@@ -47,76 +48,83 @@
 
 
     function clearEverything() {
-        firstNumber = "";
+        firstNumber = "0";
         secondNumber = "";
         operator = "";
         equaled = false;
+        result = 0;
 
     }
-    function buttonClicked(event) {
+    function buttonClicked(event) 
+    {
 
+        const eventTarget = event.target;
 
-        if (!firstNumber)
+        if(eventTarget.className === "numbers") 
         {
-
-            if (event.target.className === "numbers")
+            if(!secondNumber && firstNumber === "0" && eventTarget.textContent !== "." )
             {
-                firstNumber += event.target.textContent;
+                firstNumber = eventTarget.textContent;
                 display.textContent = firstNumber;
-
+                
+            } else if (!operator)
+            {
+                firstNumber += eventTarget.textContent;
+                display.textContent = firstNumber;
             }
-
-        } else if (!operator)
-        {
-            if (event.target.className === "numbers")
-            {
-                firstNumber += event.target.textContent;
-                display.textContent = firstNumber;
-            } else if (event.target.className === "operator") {
-                operator = event.target.textContent;
-                display.textContent = firstNumber;
-        
-            }
-
-        } else if (!secondNumber) {
-
-            if (event.target.className === "numbers")
-            {
-                secondNumber += event.target.textContent;
+            
+            if( firstNumber && operator && !secondNumber) {
+                secondNumber = eventTarget.textContent;
                 display.textContent = secondNumber;
-            } 
-        } else if (!equaled)
-        {
-            if (event.target.className === "numbers")
+            } else if (firstNumber && operator && secondNumber)
             {
-                secondNumber += event.target.textContent;
-                display.textContent = secondNumber;
-            } else if (event.target.id === "equal" ) 
-            {
-                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
-                display.textContent = result;
-                firstNumber = result;
-                secondNumber = "";
-            } else if (event.target.className === "operator" && event.target.id !== "equal")
-            {
-                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
-                display.textContent = result;
-                firstNumber = result;
-                secondNumber = "";
+                firstNumber += eventTarget.textContent;
+                display.textContent = firstNumber;
             }
+
 
         }
 
-        if(event.target.id === "ac" )
+        if(eventTarget.className === "operator")
+        {
+            if(!secondNumber && !operator)
+            {
+                operator = eventTarget.textContent;
+            }
+
+            if(operator && secondNumber && firstNumber)
+            {
+                operator = eventTarget.textContent;
+                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
+                display.textContent =  result;
+                firstNumber =  result;
+                operator = "";
+                secondNumber = "";
+
+            }
+
+        }
+        if(eventTarget.id === "equal")
+        {
+            if(secondNumber && operator)
+            {
+                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
+                display.textContent =  result;
+                firstNumber =  result;
+                operator = "";
+                secondNumber = "";
+                equaled === true;
+            
+            } 
+
+        }
+
+        if(eventTarget.id === "ac" )
         {
             display.textContent = "0";
             clearEverything();
-
+            equaled === false;
         }
-            
-
-
-
     }
 
     

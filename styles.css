@@ -32,11 +32,15 @@ body {
     width: 60px;
     height: 90px;
     font-size: 20px;
-
-
 }
 
 .operator {
+    width: 60px;
+    height: 90px;
+    font-size: 20px;
+}
+
+#equal {
     width: 60px;
     height: 90px;
     font-size: 20px;
