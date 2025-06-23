@@ -8,7 +8,8 @@ body {
 #calculator-body {
     display: flex;
     flex-direction: column;
-    border: solid 10px black;
+    border: solid 25px black;
+    border-radius: 0.5em;
 
 }
 

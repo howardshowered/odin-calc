@@ -1,3 +1,9 @@
+    let displayStr = "";
+
+    let firstNumber;
+    let secondNumber;
+    let operator;
+
     function add(num1, num2) {
         return num1 + num2;
     }
@@ -35,4 +41,15 @@
         }
 
         return result;
+    }
+
+    function buttonClicked(event) {
+        
+    }
+
+    const buttonContainers = document.querySelectorAll('button-containers');
+
+    for( let buttonContainer in buttonContainers)
+    {
+        buttonContainer.addEventListener("click", 
     }
