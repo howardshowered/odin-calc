@@ -1,8 +1,10 @@
     let displayStr = "";
 
-    let firstNumber;
-    let secondNumber;
-    let operator;
+    let firstNumber = "";
+    let secondNumber = "";
+    let operator = "";
+    let equaled = false;
+    let display = document.querySelector("#display");
 
     function add(num1, num2) {
         return num1 + num2;
@@ -43,13 +45,85 @@
         return result;
     }
 
+
+    function clearEverything() {
+        firstNumber = "";
+        secondNumber = "";
+        operator = "";
+        equaled = false;
+
+    }
     function buttonClicked(event) {
+
+
+        if (!firstNumber)
+        {
+
+            if (event.target.className === "numbers")
+            {
+                firstNumber += event.target.textContent;
+                display.textContent = firstNumber;
+
+            }
+
+        } else if (!operator)
+        {
+            if (event.target.className === "numbers")
+            {
+                firstNumber += event.target.textContent;
+                display.textContent = firstNumber;
+            } else if (event.target.className === "operator") {
+                operator = event.target.textContent;
+                display.textContent = firstNumber;
         
+            }
+
+        } else if (!secondNumber) {
+
+            if (event.target.className === "numbers")
+            {
+                secondNumber += event.target.textContent;
+                display.textContent = secondNumber;
+            } 
+        } else if (!equaled)
+        {
+            if (event.target.className === "numbers")
+            {
+                secondNumber += event.target.textContent;
+                display.textContent = secondNumber;
+            } else if (event.target.id === "equal" ) 
+            {
+                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
+                display.textContent = result;
+                firstNumber = result;
+                secondNumber = "";
+            } else if (event.target.className === "operator" && event.target.id !== "equal")
+            {
+                result =  operate(operator, Number(firstNumber), Number(secondNumber) );
+                display.textContent = result;
+                firstNumber = result;
+                secondNumber = "";
+            }
+
+        }
+
+        if(event.target.id === "ac" )
+        {
+            display.textContent = "0";
+            clearEverything();
+
+        }
+            
+
+
+
     }
 
-    const buttonContainers = document.querySelectorAll('button-containers');
+    
 
-    for( let buttonContainer in buttonContainers)
+    const buttonContainers = document.querySelectorAll(".button-containers");
+
+    for( let buttonContainer of buttonContainers)
     {
-        buttonContainer.addEventListener("click", 
+        buttonContainer.addEventListener("click", buttonClicked);
     }

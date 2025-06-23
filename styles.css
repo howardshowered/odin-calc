@@ -35,3 +35,9 @@ body {
 
 
 }
+
+.operator {
+    width: 60px;
+    height: 90px;
+    font-size: 20px;
+}
