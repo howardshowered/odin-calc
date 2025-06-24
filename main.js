@@ -67,7 +67,7 @@
                 firstNumber = eventTarget.textContent;
                 display.textContent = firstNumber;
                 
-            } else if (!operator)
+            } else if (!operator && !secondNumber)
             {
                 firstNumber += eventTarget.textContent;
                 display.textContent = firstNumber;
